@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Profolio — Professional Work & Career Manager</title>
+
+  <meta
+    name="description"
+    content="Professional portfolio, CV, resume, skills, evidence, planning and financial management system."
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <!-- PDF / Image export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+
+<div id="toastContainer"></div>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+  <div class="brand">
+    <div class="brand-icon">
+      <i class="fa-solid fa-layer-group"></i>
+    </div>
+
+    <div>
+      <h2>Profolio</h2>
+      <span>Career Workspace</span>
+    </div>
+  </div>
+
+  <nav>
+
+    <button class="nav-item active" data-page="dashboard">
+      <i class="fa-solid fa-chart-pie"></i>
+      <span>Dashboard</span>
+    </button>
+
+    <button class="nav-item" data-page="profile">
+      <i class="fa-solid fa-user"></i>
+      <span>My Profile</span>
+    </button>
+
+    <button class="nav-item" data-page="skills">
+      <i class="fa-solid fa-bolt"></i>
+      <span>Skills & Work</span>
+    </button>
+
+    <button class="nav-item" data-page="evidence">
+      <i class="fa-solid fa-camera"></i>
+      <span>Evidence</span>
+    </button>
+
+    <button class="nav-item" data-page="plans">
+      <i class="fa-solid fa-bullseye"></i>
+      <span>Plans & Goals</span>
+    </button>
+
+    <button class="nav-item" data-page="calendar">
+      <i class="fa-solid fa-calendar-days"></i>
+      <span>Calendar</span>
+    </button>
+
+    <button class="nav-item" data-page="finance">
+      <i class="fa-solid fa-wallet"></i>
+      <span>Finance</span>
+    </button>
+
+    <button class="nav-item" data-page="documents">
+      <i class="fa-solid fa-file-lines"></i>
+      <span>Portfolio / CV</span>
+    </button>
+
+  </nav>
+
+  <div class="sidebar-bottom">
+
+    <button class="nav-item" id="themeButton">
+      <i class="fa-solid fa-moon"></i>
+      <span>Dark Mode</span>
+    </button>
+
+    <button class="nav-item" id="backupButton">
+      <i class="fa-solid fa-download"></i>
+      <span>Backup Data</span>
+    </button>
+
+    <label class="nav-item backup-label">
+      <i class="fa-solid fa-upload"></i>
+      <span>Restore Data</span>
+      <input type="file" id="restoreInput" accept=".json">
+    </label>
+
+  </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+  <header class="topbar">
+
+    <button class="mobile-menu" id="mobileMenu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="page-heading">
+
+      <span class="eyebrow" id="pageEyebrow">
+        PROFESSIONAL WORKSPACE
+      </span>
+
+      <h1 id="pageTitle">
+        Dashboard
+      </h1>
+
+    </div>
+
+    <div class="top-actions">
+
+      <button class="icon-button" id="quickAddButton" title="Quick Add">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+      <div class="user-mini">
+
+        <div class="avatar" id="topAvatar">
+          A
+        </div>
+
+        <div>
+          <strong id="topUserName">Your Name</strong>
+          <small id="topUserEmail">your@email.com</small>
+        </div>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= DASHBOARD ================= -->
+
+  <section class="page active" id="page-dashboard">
+
+    <div class="hero-card">
+
+      <div>
+
+        <span class="hero-label">
+          YOUR PROFESSIONAL JOURNEY
+        </span>
+
+        <h2 id="heroGreeting">
+          Build proof of what you can do.
+        </h2>
+
+        <p>
+          Keep your skills, projects, work evidence, plans,
+          finances and professional documents in one place.
+        </p>
+
+        <button class="primary-button" onclick="openPage('documents')">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          Create My CV
+        </button>
+
+      </div>
+
+      <div class="hero-graphic">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <i class="fa-solid fa-briefcase"></i>
+      </div>
+
+    </div>
+
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+
+        <div>
+          <span>Skills</span>
+          <strong id="statSkills">0</strong>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <i class="fa-solid fa-folder-open"></i>
+        </div>
+
+        <div>
+          <span>Projects</span>
+          <strong id="statProjects">0</strong>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <i class="fa-solid fa-camera"></i>
+        </div>
+
+        <div>
+          <span>Evidence</span>
+          <strong id="statEvidence">0</strong>
+        </div>
+      </div>
+
+
+      <div class="stat-card">
+        <div class="stat-icon orange">
+          <i class="fa-solid fa-bullseye"></i>
+        </div>
+
+        <div>
+          <span>Goals</span>
+          <strong id="statGoals">0</strong>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="dashboard-grid">
+
+      <div class="panel">
+
+        <div class="panel-header">
+          <div>
+            <span class="section-label">PROGRESS</span>
+            <h3>Professional Profile</h3>
+          </div>
+        </div>
+
+        <div class="profile-progress">
+
+          <div class="progress-circle" id="profileCircle">
+            <span id="profilePercent">0%</span>
+          </div>
+
+          <div class="progress-info">
+
+            <h4 id="profileStatus">
+              Let's get started
+            </h4>
+
+            <p>
+              Complete your profile to generate stronger
+              professional documents.
+            </p>
+
+            <button class="secondary-button" onclick="openPage('profile')">
+              Complete Profile
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <span class="section-label">RECENT WORK</span>
+            <h3>Latest Projects</h3>
+          </div>
+
+          <button class="text-button" onclick="openPage('skills')">
+            View all
+          </button>
+
+        </div>
+
+        <div id="recentProjects" class="recent-list">
+          <div class="empty-state small">
+            <i class="fa-solid fa-folder-open"></i>
+            <p>No projects yet.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <div>
+          <span class="section-label">QUICK ACTIONS</span>
+          <h3>What would you like to do?</h3>
+        </div>
+
+      </div>
+
+      <div class="quick-grid">
+
+        <button class="quick-card" onclick="openPage('documents')">
+          <i class="fa-solid fa-file-signature"></i>
+          <strong>Create CV</strong>
+          <span>Build a professional CV</span>
+        </button>
+
+        <button class="quick-card" onclick="openPage('documents')">
+          <i class="fa-solid fa-address-card"></i>
+          <strong>Create Resume</strong>
+          <span>Create a targeted resume</span>
+        </button>
+
+        <button class="quick-card" onclick="openPage('documents')">
+          <i class="fa-solid fa-globe"></i>
+          <strong>Create Portfolio</strong>
+          <span>Show your work and evidence</span>
+        </button>
+
+        <button class="quick-card" onclick="openPage('evidence')">
+          <i class="fa-solid fa-camera-retro"></i>
+          <strong>Add Evidence</strong>
+          <span>Upload proof of your work</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PROFILE ================= -->
+
+  <section class="page" id="page-profile">
+
+    <div class="page-intro">
+
+      <div>
+        <span class="section-label">IDENTITY</span>
+        <h2>My Professional Profile</h2>
+        <p>
+          This information will be used when generating your
+          CV, resume and portfolio.
+        </p>
+      </div>
+
+      <button class="primary-button" id="saveProfileButton">
+        <i class="fa-solid fa-floppy-disk"></i>
+        Save Profile
+      </button>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="panel form-panel">
+
+        <h3>Personal Information</h3>
+
+        <div class="form-row">
+
+          <div class="field">
+            <label>Full Name *</label>
+            <input id="fullName" type="text" placeholder="e.g. Antony Mbali">
+          </div>
+
+          <div class="field">
+            <label>Email *</label>
+            <input id="email" type="email" placeholder="you@example.com">
+          </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <div class="field">
+            <label>Phone</label>
+            <input id="phone" type="tel" placeholder="+254...">
+          </div>
+
+          <div class="field">
+            <label>Location</label>
+            <input id="location" type="text" placeholder="Nairobi, Kenya">
+          </div>
+
+        </div>
+
+
+        <div class="field">
+          <label>Professional Title</label>
+          <input
+            id="professionalTitle"
+            type="text"
+            placeholder="e.g. Data Annotator & Reviewer"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>Professional Summary</label>
+
+          <textarea
+            id="summary"
+            rows="6"
+            placeholder="Briefly describe who you are, what you do and what you are good at..."
+          ></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel form-panel">
+
+        <h3>Professional Links</h3>
+
+        <div class="field">
+          <label>LinkedIn</label>
+          <input id="linkedin" type="url" placeholder="https://linkedin.com/in/...">
+        </div>
+
+        <div class="field">
+          <label>GitHub</label>
+          <input id="github" type="url" placeholder="https://github.com/...">
+        </div>
+
+        <div class="field">
+          <label>Website</label>
+          <input id="website" type="url" placeholder="https://...">
+        </div>
+
+        <div class="field">
+          <label>Profile Photo</label>
+
+          <div class="photo-upload">
+
+            <div class="profile-photo" id="profilePhotoPreview">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div>
+              <label class="upload-button">
+                <i class="fa-solid fa-image"></i>
+                Choose Photo
+                <input type="file" id="profilePhotoInput" accept="image/*">
+              </label>
+
+              <small>
+                Recommended: square professional photo.
+              </small>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <h3>Professional Categories</h3>
+
+      <div class="field">
+
+        <label>Industries / Areas</label>
+
+        <input
+          id="industries"
+          type="text"
+          placeholder="Data annotation, AI, Technology, Research..."
+        >
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= SKILLS ================= -->
+
+  <section class="page" id="page-skills">
+
+    <div class="page-intro">
+
+      <div>
+        <span class="section-label">EXPERIENCE</span>
+        <h2>Skills & Work</h2>
+        <p>
+          Record your abilities, projects, employment and achievements.
+        </p>
+      </div>
+
+      <button class="primary-button" id="addSkillButton">
+        <i class="fa-solid fa-plus"></i>
+        Add Skill
+      </button>
+
+    </div>
+
+
+    <div class="skills-layout">
+
+      <div class="panel">
+
+        <div class="panel-header">
+          <div>
+            <span class="section-label">SKILLS</span>
+            <h3>My Skills</h3>
+          </div>
+        </div>
+
+        <div id="skillsList" class="skills-list"></div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <span class="section-label">PROJECTS</span>
+            <h3>Work & Projects</h3>
+          </div>
+
+          <button class="secondary-button" id="addProjectButton">
+            <i class="fa-solid fa-plus"></i>
+            Project
+          </button>
+
+        </div>
+
+        <div id="projectsList"></div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= EVIDENCE ================= -->
+
+  <section class="page" id="page-evidence">
+
+    <div class="page-intro">
+
+      <div>
+        <span class="section-label">PROOF OF WORK</span>
+        <h2>Evidence & Snapshots</h2>
+
+        <p>
+          Upload screenshots, project photos, certificates and other
+          evidence that proves your experience.
+        </p>
+      </div>
+
+      <label class="primary-button upload-button">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        Upload Evidence
+        <input type="file" id="evidenceInput" accept="image/*" multiple>
+      </label>
+
+    </div>
+
+
+    <div class="evidence-info">
+
+      <div>
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <div>
+          <strong>Your evidence stays with you</strong>
+          <p>
+            Files are stored locally in this browser.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div id="evidenceGrid" class="evidence-grid"></div>
+
+  </section>
+
+
+  <!-- ================= PLANS ================= -->
+
+  <section class="page" id="page-plans">
+
+    <div class="page-intro">
+
+      <div>
+        <span class="section-label">DIRECTION</span>
+        <h2>Plans & Goals</h2>
+        <p>
+          Plan what you want to accomplish and track progress.
+        </p>
+      </div>
+
+      <button class="primary-button" id="addGoalButton">
+        <i class="fa-solid fa-plus"></i>
+        Add Goal
+      </button>
+
+    </div>
+
+
+    <div class="goals-summary">
+
+      <div class="goal-stat">
+        <span>Total Goals</span>
+        <strong id="goalTotal">0</strong>
+      </div>
+
+      <div class="goal-stat">
+        <span>Completed</span>
+        <strong id="goalCompleted">0</strong>
+      </div>
+
+      <div class="goal-stat">
+        <span>In Progress</span>
+        <strong id="goalProgress">0</strong>
+      </div>
+
+    </div>
+
+
+    <div id="goalsList" class="goals-list"></div>
+
+  </section>
+
+
+  <!-- ================= CALENDAR ================= -->
+
+  <section class="page" id="page-calendar">
+
+    <div class="page-intro">
+
+      <div>
+        <span class="section-label">PLANNING</span>
+        <h2>Calendar</h2>
+        <p>
+          Organize important work, deadlines and professional goals.
+        </p>
+      </div>
+
+      <button class="primary-button" id="addEventButton">
+        <i class="fa-solid fa-plus"></i>
+        Add Event
+      </button>
+
+    </div>
+
+
+    <div class="calendar-panel panel">
+
+      <div class="calendar-header">
+
+        <button class="icon-button" id="previousMonth">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <h3 id="calendarMonth"></h3>
+
+        <button class="icon-button" id="nextMonth">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+      </div>
+
+      <div class="calendar-weekdays">
+
+        <span>Sun</span>
+        <span>Mon</span>
+        <span>Tue</span>
+        <span>Wed</span>
+        <span>Thu</span>
+        <span>Fri</span>
+        <span>Sat</span>
+
+      </div>
+
+      <div id="calendarGrid" class="calendar-grid"></div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <div>
+          <span class="section-label">UPCOMING</span>
+          <h3>Scheduled Work</h3>
+        </div>
+      </div>
+
+      <div id="eventsList"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FINANCE ================= -->
+
+  <section class="page" id="page-finance">
+
+    <div class="page-intro">
+
+      <div>
+        <span class="section-label">MONEY</span>
+        <h2>Financial Calculator</h2>
+        <p>
+          Estimate income, expenses, savings and project earnings.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="finance-cards">
+
+      <div class="finance-card income-card">
+
+        <span>Total Income</span>
+
+        <strong id="totalIncome">
+          KES 0
+        </strong>
+
+        <i class="fa-solid fa-arrow-trend-up"></i>
+
+      </div>
+
+
+      <div class="finance-card expense-card">
+
+        <span>Total Expenses</span>
+
+        <strong id="totalExpenses">
+          KES 0
+        </strong>
+
+        <i class="fa-solid fa-arrow-trend-down"></i>
+
+      </div>
+
+
+      <div class="finance-card balance-card">
+
+        <span>Balance</span>
+
+        <strong id="totalBalance">
+          KES 0
+        </strong>
+
+        <i class="fa-solid fa-wallet"></i>
+
+      </div>
+
+    </div>
+
+
+    <div class="finance-layout">
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <span class="section-label">CALCULATOR</span>
+            <h3>Income Calculator</h3>
+          </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <div class="field">
+
+            <label>Rate</label>
+
+            <input
+              type="number"
+              id="calcRate"
+              placeholder="3000"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Hours / Units</label>
+
+            <input
+              type="number"
+              id="calcHours"
+              placeholder="90"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="calculator-result">
+
+          <span>Estimated Earnings</span>
+
+          <strong id="calculatedAmount">
+            KES 0
+          </strong>
+
+        </div>
+
+
+        <button class="primary-button" id="saveIncomeButton">
+          <i class="fa-solid fa-plus"></i>
+          Add To Income
+        </button>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div>
+            <span class="section-label">EXPENSES</span>
+            <h3>Add Expense</h3>
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Description</label>
+
+          <input
+            type="text"
+            id="expenseName"
+            placeholder="Internet, transport, equipment..."
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Amount</label>
+
+          <input
+            type="number"
+            id="expenseAmount"
+            placeholder="0"
+          >
+
+        </div>
+
+
+        <button class="secondary-button" id="saveExpenseButton">
+          <i class="fa-solid fa-plus"></i>
+          Add Expense
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <div>
+          <span class="section-label">TRANSACTIONS</span>
+          <h3>Financial History</h3>
+        </div>
+
+      </div>
+
+      <div id="transactionsList"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= DOCUMENT GENERATOR ================= -->
+
+  <section class="page" id="page-documents">
+
+    <div class="page-intro">
+
+      <div>
+
+        <span class="section-label">
+          PROFESSIONAL DOCUMENTS
+        </span>
+
+        <h2>Create Your Portfolio, CV or Resume</h2>
+
+        <p>
+          Profolio uses your saved profile, skills, work history,
+          projects and evidence to create a professional document.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="document-types">
+
+      <button
+        class="document-type active"
+        data-document="portfolio"
+      >
+
+        <div class="document-type-icon">
+          <i class="fa-solid fa-globe"></i>
+        </div>
+
+        <strong>Portfolio</strong>
+
+        <span>
+          Detailed presentation of your skills, projects and evidence.
+        </span>
+
+      </button>
+
+
+      <button
+        class="document-type"
+        data-document="cv"
+      >
+
+        <div class="document-type-icon">
+          <i class="fa-solid fa-file-lines"></i>
+        </div>
+
+        <strong>CV</strong>
+
+        <span>
+          Detailed professional history for job applications.
+        </span>
+
+      </button>
+
+
+      <button
+        class="document-type"
+        data-document="resume"
+      >
+
+        <div class="document-type-icon">
+          <i class="fa-solid fa-address-card"></i>
+        </div>
+
+        <strong>Resume</strong>
+
+        <span>
+          Concise, targeted professional summary.
+        </span>
+
+      </button>
+
+    </div>
+
+
+    <div class="generator-layout">
+
+      <div class="panel generator-controls">
+
+        <span class="section-label">DOCUMENT SETTINGS</span>
+
+        <h3>Generate Professional Document</h3>
+
+        <p class="muted">
+          First complete your profile and add your skills/projects.
+          The generator will automatically use them.
+        </p>
+
+
+        <div class="generator-checks">
+
+          <label>
+            <input type="checkbox" id="includeSkills" checked>
+            Include skills
+          </label>
+
+          <label>
+            <input type="checkbox" id="includeProjects" checked>
+            Include projects
+          </label>
+
+          <label>
+            <input type="checkbox" id="includeEvidence" checked>
+            Include evidence
+          </label>
+
+          <label>
+            <input type="checkbox" id="includeGoals">
+            Include goals
+          </label>
+
+        </div>
+
+
+        <button class="primary-button full-button" id="generateDocumentButton">
+
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+          Generate Document
+
+        </button>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="document-preview-header">
+
+          <div>
+
+            <span class="section-label">
+              LIVE PREVIEW
+            </span>
+
+            <h3 id="previewDocumentTitle">
+              Portfolio
+            </h3>
+
+          </div>
+
+          <div class="preview-actions">
+
+            <button
+              class="secondary-button"
+              id="downloadPdfButton"
+            >
+              <i class="fa-solid fa-file-pdf"></i>
+              PDF
+            </button>
+
+            <button
+              class="secondary-button"
+              id="downloadImageButton"
+            >
+              <i class="fa-solid fa-image"></i>
+              PNG
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="document-paper-wrap">
+
+          <article id="documentPaper" class="document-paper">
+
+            <div class="document-empty">
+
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+              <h3>Your document will appear here</h3>
+
+              <p>
+                Select Portfolio, CV or Resume and click
+                Generate Document.
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal-overlay" id="modalOverlay">
+
+  <div class="modal" id="modal">
+
+    <div class="modal-header">
+
+      <div>
+        <span class="section-label" id="modalEyebrow">
+          ADD
+        </span>
+
+        <h3 id="modalTitle">
+          Add Item
+        </h3>
+      </div>
+
+      <button class="icon-button" id="closeModal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+    </div>
+
+    <div id="modalBody"></div>
+
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
